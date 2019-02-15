@@ -1,1 +1,41 @@
 # kiwi-maintenance
+
+# Foobar
+
+Foobar is a Python library for dealing with word pluralization.
+
+## Installation
+
+Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
+
+```bash
+pip install foobar
+```
+
+## Usage
+
+
+## Built With
+[Airtable API](https://airtable.com)
+Jupyter Notebook
+
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+1. Fork <https://github.com/m1ch43lw4ng/kiwi-maintenance>
+2. Clone 
+```bash
+git clone https://github.com/USERNAME/kiwi-maintenance
+```
+2. Create feature branch
+```bash
+git checkout -b feature/NAME
+```
+3. Commit your changes
+```bash
+git commit -am 'Added ___'
+```
+4. Push to the branch
+```bash
+push origin feature/NAME
+```

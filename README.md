@@ -2,16 +2,7 @@
 
 Uses Airtable data and API to download data and ...
 
-## Installation
-
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
-
-```bash
-pip install foobar
-```
-
 ## Usage
-
 
 ## Built With
 * [Airtable API](https://airtable.com)

@@ -1,8 +1,6 @@
 # kiwi-maintenance
 
-# Foobar
-
-Foobar is a Python library for dealing with word pluralization.
+Uses Airtable data and API to download data and ...
 
 ## Installation
 
@@ -16,8 +14,8 @@ pip install foobar
 
 
 ## Built With
-[Airtable API](https://airtable.com)
-Jupyter Notebook
+* [Airtable API](https://airtable.com)
+* Jupyter Notebook
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.

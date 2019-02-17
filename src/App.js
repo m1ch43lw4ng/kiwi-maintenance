@@ -19,6 +19,7 @@ class App extends Component {
   }
 
   render() {
+      console.log(this.state.records)
     return (
       <table class="table">
         <thead>
@@ -41,13 +42,13 @@ class App extends Component {
 
 export default App;
 
-const BotRow = ({id, status, symptoms, accountable, updated, problems, trigger, one, two, three}) => (
+const BotRow = ({id, fields, createdTime}) => (
   <tr>
-    <th scope ="row">{id}</th>
-    <td>{status}</td>
-    <td>{symptoms}</td>
-    <td>{accountable}</td>
-    <td>{updated}</td>
-    <td>{problems}</td>
+    <th scope ="row">{fields["KiwibotID"]}</th>
+    <td>{fields["Status"]}</td>
+    <td>{fields["Symtoms/Diagnostic"]}</td>
+    <td>{fields["Accountable"]}</td>
+    <td>{fields["Last Updated"]}</td>
+    <td>{fields["Problem"]}</td>
   </tr>
 );

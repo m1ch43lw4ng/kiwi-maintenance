@@ -6,7 +6,9 @@ Uses Airtable data and API to download data and ...
 
 ## Built With
 * [Airtable API](https://airtable.com)
-* Jupyter Notebook
+* React.js
+* Node.js
+* Bootstrap
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.

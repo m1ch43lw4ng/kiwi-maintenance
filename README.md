@@ -3,7 +3,6 @@
 Uses Airtable data and API to download data and ...
 ## Author(s)
 * [Michael Wang](http://m1ch43lw4ng.com), http://github.com/m1ch43lw4ng
-## Usage
 
 ## Built With
 * [Airtable API](https://airtable.com)

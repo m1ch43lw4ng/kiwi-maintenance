@@ -11,6 +11,16 @@ Uses Airtable data and API to download data and ...
 * Node.js
 * Bootstrap
 
+## Usage
+1. Clone the repository `git clone https://github.com/m1ch43lw4ng/kiwi-maintenance`
+2. Cd into the correct diretory `cd kiwi-maintenance`
+2. Install node modules `npm install`
+3. use npm to run
+```bash
+npm start
+```
+
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 

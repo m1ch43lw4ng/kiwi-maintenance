@@ -4,10 +4,14 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^4.3.1",
+    "datatables.net": "^1.10.19",
+    "datatables.net-dt": "^1.10.19",
     "jquery": "^3.3.1",
     "popper.js": "^1.14.7",
     "react": "^16.8.2",
-    "react-dom": "^16.8.2",
+    "react-bootstrap-table": "^4.3.1",
+    "react-dom": "^16.8.3",
+    "react-page-layout": "^0.9.8",
     "react-scripts": "2.1.5"
   },
   "scripts": {

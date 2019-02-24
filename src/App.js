@@ -15,6 +15,7 @@ class App extends Component {
 
     render() {
 
+<<<<<<< HEAD
         // Render your page inside
         // the layout provider
         return (
@@ -23,6 +24,28 @@ class App extends Component {
             </LayoutProvider>
         );
     }
+=======
+  render() {
+      console.log(this.state.records)
+    return (
+      <table class="table">
+        <thead>
+          <tr class="thead-dark">
+            <th scope="col">Kiwibot ID</th>
+            <th scope="col">Status</th>
+            <th scope="col">Symptoms/Diagnostic</th>
+            <th scope="col">Accountable</th>
+            <th scope="col">Last Updated</th>
+            <th scope="col">Problems</th>
+          </tr>
+        </thead>
+        <tbody>
+          {this.state.records.map(record => <BotRow {...record} /> )}
+        </tbody>
+      </table>
+    );
+  }
+>>>>>>> jupyter
 }
 
 render(App, document.getElementById('root'));

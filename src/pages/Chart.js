@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 
+let order = "desc"
 class Chart extends Component {
 
     constructor(props) {
@@ -18,42 +20,35 @@ class Chart extends Component {
         });
     }
 
-    onSort(event, sortKey){
-        const records = this.state.records;
-        records.sort((a,b) => a[1][sortKey].localeCompare(b[1][sortKey]))
-        this.setState({records})
+    handleBtnClick = () => {
+        if (order === 'desc') {
+            this.refs.table.handleSort('asc', 'name');
+            order = 'asc';
+        } else {
+            this.refs.table.handleSort('desc', 'name');
+            order = 'desc';
+        }
     }
 
     render() {
+        console.log(this.state.records);
         return (
-            <table id="kiwibots" className="table table-bordered dataTable table-hover" role="grid">
-                <thead class="thead-dark">
-                    <tr role="row">
-                        <th onClick={e => this.onSort(e, 'KiwibotID')}> Kiwibot ID </th>
-                        <th onClick={e => this.onSort(e, 'Status')}> Status </th>
-                        <th onClick={e => this.onSort(e, 'Symtoms/Diagnostic')}> Symptoms/Diagnostic </th>
-                        <th onClick={e => this.onSort(e, 'Accountable')}> Accountable </th>
-                        <th onClick={e => this.onSort(e, 'Last Updated')}> Last Updated </th>
-                        <th onClick={e => this.onSort(e, 'Problem')}> Problems </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {this.state.records.map(record => <BotRow {...record} />)}
-                </tbody>
-            </table>
+            <div>
+                <BootstrapTable ref='table' data={ this.state.records.map(record => recordfields) }>
+                    <TableHeaderColumn dataField='id' isKey={ true } dataSort={ true }>Kiwibot ID</TableHeaderColumn>
+                    <TableHeaderColumn dataField='status' dataSort={ true }>Status</TableHeaderColumn>
+                    <TableHeaderColumn dataField='symptoms' dataSort={ true }>Symptoms/Diagnostic</TableHeaderColumn>
+                    <TableHeaderColumn dataField='accountable' dataSort={ true }>Accountable</TableHeaderColumn>
+                    <TableHeaderColumn dataField='updated' dataSort={ true }>Last Updated</TableHeaderColumn>
+                    <TableHeaderColumn dataField='problem' dataSort={ true }>Problem</TableHeaderColumn>
+                </BootstrapTable>
+            </div>
         );
     }
 }
 
 export default Chart;
 
-const BotRow = ({id, fields, createdTime}) => (
-    <tr role="row">
-        <th scope ="row">{fields["KiwibotID"]}</th>
-        <td>{fields["Status"]}</td>
-        <td>{fields["Symtoms/Diagnostic"]}</td>
-        <td>{fields["Accountable"]}</td>
-        <td>{fields["Last Updated"]}</td>
-        <td>{fields["Problem"]}</td>
-    </tr>
+const RowData = ({id, fields}) => (
+    fields
 );

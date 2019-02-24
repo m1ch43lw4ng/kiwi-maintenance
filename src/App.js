@@ -23,7 +23,7 @@ class App extends Component {
     return (
       <table class="table">
         <thead>
-          <tr>
+          <tr class="thead-dark">
             <th scope="col">Kiwibot ID</th>
             <th scope="col">Status</th>
             <th scope="col">Symptoms/Diagnostic</th>

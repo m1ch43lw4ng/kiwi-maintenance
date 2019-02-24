@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import { LayoutProvider } from 'react-page-layout';
 import PublicLayout from './layouts/PublicLayout.js';
-import LoginPage from './pages/LoginPage.js';
 import Chart from './pages/Chart.js';
 
 const layouts = {

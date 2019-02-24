@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
+import {render} from "react-dom";
 
-let order = "desc"
 class Chart extends Component {
 
     constructor(props) {
@@ -20,35 +19,37 @@ class Chart extends Component {
         });
     }
 
-    handleBtnClick = () => {
-        if (order === 'desc') {
-            this.refs.table.handleSort('asc', 'name');
-            order = 'asc';
-        } else {
-            this.refs.table.handleSort('desc', 'name');
-            order = 'desc';
-        }
-    }
-
     render() {
-        console.log(this.state.records);
         return (
-            <div>
-                <BootstrapTable ref='table' data={ this.state.records.map(record => recordfields) }>
-                    <TableHeaderColumn dataField='id' isKey={ true } dataSort={ true }>Kiwibot ID</TableHeaderColumn>
-                    <TableHeaderColumn dataField='status' dataSort={ true }>Status</TableHeaderColumn>
-                    <TableHeaderColumn dataField='symptoms' dataSort={ true }>Symptoms/Diagnostic</TableHeaderColumn>
-                    <TableHeaderColumn dataField='accountable' dataSort={ true }>Accountable</TableHeaderColumn>
-                    <TableHeaderColumn dataField='updated' dataSort={ true }>Last Updated</TableHeaderColumn>
-                    <TableHeaderColumn dataField='problem' dataSort={ true }>Problem</TableHeaderColumn>
-                </BootstrapTable>
-            </div>
+            <table class="table table-bordered table-hover table-responsive">
+                <thead>
+                <tr class="thead-dark">
+                    <th scope="col">Kiwibot ID</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Symptoms/Diagnostic</th>
+                    <th scope="col">Accountable</th>
+                    <th scope="col">Last Updated</th>
+                    <th scope="col">Problems</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {this.state.records.map(record => <RowData{...record} /> )}
+                </tbody>
+            </table>
         );
     }
 }
 
+
 export default Chart;
 
-const RowData = ({id, fields}) => (
-    fields
+const RowData = ({id, fields, createdTime}) => (
+    <tr>
+        <th scope ="row">{fields["KiwibotID"]}</th>
+        <td>{fields["Status"]}</td>
+        <td>{fields["Symtoms/Diagnostic"]}</td>
+        <td>{fields["Accountable"]}</td>
+        <td>{fields["Last Updated"]}</td>
+        <td>{fields["Problem"]}</td>
+    </tr>
 );

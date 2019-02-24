@@ -25,7 +25,6 @@ npm start
 2. Open notebook with `jupyter notebook`
 3. Navigate into notebooks directory
 4. Run data.ipynb
-```
 
 
 ## Contributing

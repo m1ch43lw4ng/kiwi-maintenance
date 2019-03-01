@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import SplitPane from 'react-split-pane';
+import Iframe from 'react-iframe'
+import '../index.css';
 
 class Chart extends Component {
 
@@ -19,22 +22,37 @@ class Chart extends Component {
     }
 
     render() {
+        console.log(this.state.records);
         return (
-            <table class="table table-bordered table-hover table-responsive">
-                <thead>
-                <tr class="thead-dark">
-                    <th scope="col">Kiwibot ID</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Symptoms/Diagnostic</th>
-                    <th scope="col">Accountable</th>
-                    <th scope="col">Last Updated</th>
-                    <th scope="col">Problems</th>
-                </tr>
-                </thead>
-                <tbody>
-                    {this.state.records.map(record => <RowData{...record} /> )}
-                </tbody>
-            </table>
+            <SplitPane split="vertical" minSize={500} maxSize={1200} defaultSize={1000} allowResize={true}>
+                <div className="table-wrapper">
+                    <table className="table table-bordered table-hover table-responsive">
+                        <thead>
+                            <tr className="thead-dark">
+                                <th scope="col">Kiwibot ID</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Symptoms/Diagnostic</th>
+                                <th scope="col">Accountable</th>
+                                <th scope="col">Last Updated</th>
+                                <th scope="col">Problems</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.state.records.map(record => <RowData{...record} />)}
+                        </tbody>
+                    </table>
+                </div>
+                <div className="overlay">
+                    <Iframe url="https://airtable.com/embed/shryz6KcYKk2rdU1u?backgroundColor=purple"
+                            width="100%"
+                            height="800"
+                            id="myId"
+                            className="airtable-embed"
+                            display="initial"
+                            position="relative"
+                            allowFullScreen/>
+                </div>
+            </SplitPane>
         );
     }
 }

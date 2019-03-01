@@ -1,0 +1,7 @@
+.notInteractive {
+    pointer-events: none;
+}
+
+.isInteractive {
+    pointer-events: auto;
+}

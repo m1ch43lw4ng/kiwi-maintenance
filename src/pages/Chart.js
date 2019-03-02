@@ -2,27 +2,45 @@ import React, { Component } from 'react';
 import SplitPane from 'react-split-pane';
 import Iframe from 'react-iframe'
 import '../index.css';
+import Airtable from 'airtable';
+import config from './config.js';
+
+const base = new Airtable({ apiKey: config.get('apiKey')}).base(config.get('baseId'));
+const linkUrl = "https://airtable.com/embed/"+ config.get('url')+ "?backgroundColor=purple";
 
 class Chart extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            records: []
+            botxreg: [],
+            updates: []
         };
     }
 
     componentDidMount() {
-        fetch('https://api.airtable.com/v0/appftVAUOeQ3VtUxf/BOTXREG1?api_key=key6X8BebBRSfUqvE')
-            .then((resp) => resp.json())
-            .then(data => {
-                this.setState({ records: data.records });
-            }).catch(err => {
-        });
+        base('BOTXREG1').select({view: 'Grid view'})
+            .eachPage(
+                (records, fetchNextPage) => {
+                    this.setState({
+                        botxreg: records
+                    });
+                    fetchNextPage();
+                }
+            );
+        base('REGXNOVEDADES').select({view: 'Grid view'})
+            .eachPage(
+                (records, fetchNextPage) => {
+                    this.setState({
+                        updates: records
+                    });
+                    fetchNextPage();
+                }
+            );
     }
 
     render() {
-        console.log(this.state.records);
+        console.log(this.state.updates);
         return (
             <SplitPane split="vertical" minSize={500} maxSize={1200} defaultSize={1000} allowResize={true}>
                 <div className="table-wrapper">
@@ -38,12 +56,12 @@ class Chart extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {this.state.records.map(record => <RowData{...record} />)}
+                            {this.state.botxreg.map(record => <RowData{...record} />)}
                         </tbody>
                     </table>
                 </div>
                 <div className="overlay">
-                    <Iframe url="https://airtable.com/embed/shryz6KcYKk2rdU1u?backgroundColor=purple"
+                    <Iframe url= {linkUrl}
                             width="100%"
                             height="800"
                             id="myId"

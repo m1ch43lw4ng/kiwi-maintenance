@@ -1,6 +1,7 @@
 # kiwi-maintenance
 
-Uses Airtable data and API to download data and ...
+A React web-app to read and write from an Airtable database and sync the different tables in the base.
+
 ## Author(s)
 * [Michael Wang](http://m1ch43lw4ng.com), http://github.com/m1ch43lw4ng
 
@@ -11,6 +12,23 @@ Uses Airtable data and API to download data and ...
 * Bootstrap
 
 ## Usage
+### Config
+To use this, create a config.js file with the contents and correct credentials 
+1. In terminal: `cd src && touch config.js && cd ..`
+2. In the config file, copy-paste the following text and fill in the variables:
+```js
+import config from "react-global-configuration";
+
+config.set({
+    apiKey: 'APIKEY',
+    baseId: 'BASEID',
+    url: 'URL'
+});
+
+export default config;
+
+```
+
 ### React app
 1. Clone the repository `git clone https://github.com/m1ch43lw4ng/kiwi-maintenance`
 2. Cd into the correct directory `cd kiwi-maintenance`

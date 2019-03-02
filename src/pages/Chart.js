@@ -3,7 +3,7 @@ import SplitPane from 'react-split-pane';
 import Iframe from 'react-iframe'
 import '../index.css';
 import Airtable from 'airtable';
-import config from './config.js';
+import config from '../config.js';
 
 const base = new Airtable({ apiKey: config.get('apiKey')}).base(config.get('baseId'));
 const linkUrl = "https://airtable.com/embed/"+ config.get('url')+ "?backgroundColor=purple";

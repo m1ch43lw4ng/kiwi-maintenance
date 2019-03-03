@@ -40,7 +40,6 @@ class Chart extends Component {
     }
 
     render() {
-        console.log(this.state.updates);
         return (
             <SplitPane split="vertical" minSize={500} maxSize={1200} defaultSize={1000} allowResize={true}>
                 <div className="table-wrapper">

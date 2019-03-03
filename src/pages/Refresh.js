@@ -72,7 +72,6 @@ class Refresh extends Component {
     render(){
         return (
             <div>
-                Seconds: {this.state.seconds}
             </div>
         );
     }

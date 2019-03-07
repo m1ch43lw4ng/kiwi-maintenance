@@ -8,68 +8,99 @@ class Refresh extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            updates: [],
-            num:0,
-            list: [],
-            prevNum: 0
+            maxRegID: 0,
+            newUpdates: []
         };
     }
 
     refresh() {
-        this.setState(prevState => ({
-            list: prevState.updates,
-            prevNum: prevState.num,
-            num: prevState.updates.length
-        }));
-        base('REGXNOVEDADES').select({view: 'Grid view'})
-            .eachPage(
-                (records, fetchNextPage) => {
-                    this.setState({
-                        updates: records
-                    });
-                    fetchNextPage();
-                }
-            );
-        console.log(this.state.list);
-        console.log(this.state.num);
-        console.log(this.state.prevNum);
-
-        for (var i = 0; i < (this.state.updates.length % 100) - (this.state.prevNum % 100); i++) {
-            var newRecord = this.state.updates[this.state.updates.length - i - 1];
-            console.log(newRecord);
-
-            var oldRecord = base('BOTXREG1').find(newRecord["fields"]["KiwibotID"], function(err, record) {
-                if (err) { console.error(err); return; }
-                    console.log(record);
+        this.setState({
+            newUpdates: []
+        })
+        base('REGXNOVEDADES').select({
+            view: 'Grid view',
+            filterByFormula: 'REGID >= ' + this.state.maxRegID
+        }).eachPage(
+            (records, fetchNextPage) => {
+                records.forEach((record) => {
+                    this.state.newUpdates.push(record);
                 });
-            console.log(oldRecord);
+                this.setState({
+                    maxRegID: records[records.length - 1]["fields"]["REGID"]
+                });
+                fetchNextPage();
+            }
+        );
 
-            base('BOTXREG1').replace(oldRecord["fields"]["id"], {
-                newRecord
-            }, function(err, record) {
-                if (err) { console.error(err); return; }
-                console.log(record.get('id'));
+        console.log(this.state.maxRegID);
+        console.log(this.state.newUpdates);
+
+        let oldRecords = [];
+        this.state.newUpdates.forEach((newRecord) => {
+            let id = newRecord["fields"]["KiwibotID"];
+            base('BOTXREG1').select({
+                view: 'Grid view',
+                filterByFormula: 'KiwibotID = ' + id
+            }).eachPage(
+                (records, fetchNextPage) => {
+                records.forEach(function(record) {
+                    oldRecords.push(record);
+                });
+                fetchNextPage();
             });
-        }
+        });
+
+        this.state.newUpdates.forEach((newRecord) => {
+            let id = newRecord["fields"]["KiwibotID"];
+            base('BOTXREG1').select({
+                view: 'Grid view',
+                filterByFormula: 'KiwibotID =' + id
+            }).eachPage(
+                (records, fetchNextPage) => {
+                    records.forEach(function(record) {
+                        oldRecords.push(record);
+                        fetchNextPage();
+                        base('BOTXREG1').update({record}, {newRecord}, function(err, record) {
+                            if (err) { console.error(err); return; }
+                            console.log(record.get('id'));
+                        });
+                        base('BOTXREG1').update('recCEyKaYnJW6VwN1', {
+                            "REGID": 134,
+                            "Status": [
+                                "In Queue"
+                            ],
+                            "Symtoms/Diagnostic": "door not opening",
+                            "Last Updated": "2019-02-11T23:03:00.000Z",
+                            "Accountable": "Ricardo Rambal",
+                            "KiwibotID": 208,
+                            "Active Trigger": 0
+                        }
+                    });
+                });
+        });
+        console.log(oldRecords);
+        console.log(this.state.maxRegID);
     }
 
     componentDidMount() {
-        this.setState ({
-            updates: []
-        });
-        base('REGXNOVEDADES').select({view: 'Grid view'})
-            .eachPage(
-                (records, fetchNextPage) => {
-                    this.setState({
-                        updates: records
-                    });
-                    fetchNextPage();
-                }
-            );
+        base('REGXNOVEDADES').select({
+            view: 'Grid view',
+            filterByFormula: 'REGID > 197'
+        }).eachPage(
+            (records, fetchNextPage) => {
+                console.log(records);
+                this.setState({
+                    maxRegID: records[records.length - 1]["fields"]["REGID"]
+                });
+                fetchNextPage();
+            }
+        );
+        console.log(this.state.maxRegID);
+
         setInterval(() => this.refresh(), 10000);
     }
 
-    render(){
+    render() {
         return (
             <div>
             </div>
@@ -77,4 +108,4 @@ class Refresh extends Component {
     }
 }
 
-export default Refresh
+export default Refresh;

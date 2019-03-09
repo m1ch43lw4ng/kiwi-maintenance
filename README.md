@@ -37,13 +37,6 @@ export default config;
 ```bash
 npm start
 ```
-### Jupyter notebook components
-1. Clone the repository `git clone https://github.com/m1ch43lw4ng/kiwi-maintenance`
-2. Upgrade to recent pip and run `pip install airtable-python-wrapper`
-2. Open notebook with `jupyter notebook`
-3. Navigate into notebooks directory
-4. Run data.ipynb
-
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.

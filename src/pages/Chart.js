@@ -5,50 +5,53 @@ import '../index.css';
 import Airtable from 'airtable';
 import config from '../config.js';
 import BootstrapTable from 'react-bootstrap-table-next';
+import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 
 const base = new Airtable({ apiKey: config.get('apiKey')}).base(config.get('baseId'));
 const linkUrl = "https://airtable.com/embed/"+ config.get('url')+ "?backgroundColor=purple";
+
+const { SearchBar, ClearSearchButton } = Search;
 
 const columns = [{
     dataField: 'KiwibotID',
     text: 'Kiwibot ID',
     sort: true,
     headerStyle: {
-        backgroundColor: '#3bb4e5'
+        backgroundColor: '#FFFFFF'
     }
 }, {
     dataField: 'Status',
     text: 'Status',
     sort: true,
     headerStyle: {
-        backgroundColor: '#3bb4e5'
+        backgroundColor: '#FFFFFF'
     }
 }, {
     dataField: 'Symtoms/Diagnostic',
     text: 'Symptoms/Diagnostic',
     sort: true,
     headerStyle: {
-        backgroundColor: '#3bb4e5'
+        backgroundColor: '#FFFFFF'
     }
 }, {
     dataField: 'Accountable',
     text: 'Accountable',
     sort: true,
     headerStyle: {
-        backgroundColor: '#3bb4e5'
+        backgroundColor: '#FFFFFF'
     }
 }, {
     dataField: 'Last Updated',
     text: 'Last Updated',
     sort: true,
     headerStyle: {
-        backgroundColor: '#3bb4e5'
+        backgroundColor: '#FFFFFF'
     }
 }, {
     dataField: 'Problem',
     text: 'Problems',
     headerStyle: {
-        backgroundColor: '#3bb4e5'
+        backgroundColor: '#FFFFFF'
     }
 }];
 
@@ -178,13 +181,27 @@ class Chart extends Component {
         return (
             <SplitPane split="vertical" minSize={500} maxSize={1200} defaultSize={1000} allowResize={true}>
                 <div className="table-wrapper">
-                    <BootstrapTable
-                        bootstrap4
-                        keyField="KiwibotID"
+                    <ToolkitProvider
+                        keyField="id"
                         data={ this.state.botxreg.map(record => RowData(record)) }
                         columns={ columns }
+                        search
                         defaultSorted={ defaultSorted }
-                    />
+                    >
+                        {
+                            props => (
+                                <div>
+                                    <h3>Kiwibot Registry</h3>
+                                    <SearchBar { ...props.searchProps } />
+                                    <ClearSearchButton { ...props.searchProps } />
+                                    <hr />
+                                    <BootstrapTable
+                                        { ...props.baseProps }
+                                    />
+                                </div>
+                            )
+                        }
+                    </ToolkitProvider>
                 </div>
                 <div className="overlay">
                     <Iframe url= {linkUrl}

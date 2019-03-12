@@ -32,8 +32,8 @@ export default config;
 ### React app
 1. Clone the repository `git clone https://github.com/m1ch43lw4ng/kiwi-maintenance`
 2. Cd into the correct directory `cd kiwi-maintenance`
-2. Install node modules `npm install`
-3. use npm to run
+3. Install node modules `npm install`
+4. use npm to run
 ```bash
 npm start
 ```

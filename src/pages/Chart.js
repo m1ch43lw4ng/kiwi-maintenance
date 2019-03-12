@@ -6,6 +6,7 @@ import Airtable from 'airtable';
 import config from '../config.js';
 import BootstrapTable from 'react-bootstrap-table-next';
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
+import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 
 const base = new Airtable({ apiKey: config.get('apiKey')}).base(config.get('baseId'));
 const linkUrl = "https://airtable.com/embed/"+ config.get('url')+ "?backgroundColor=purple";
@@ -28,7 +29,7 @@ const columns = [{
     }
 }, {
     dataField: 'Symtoms/Diagnostic',
-    text: 'Symptoms/Diagnostic',
+    text: 'Diagnostic',
     sort: true,
     headerStyle: {
         backgroundColor: '#FFFFFF'
@@ -187,6 +188,10 @@ class Chart extends Component {
                         columns={ columns }
                         search
                         defaultSorted={ defaultSorted }
+                        boostrap4={ true }
+                        rel="stylesheet"
+                        href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"
+                        crossOrigin="anonymous"
                     >
                         {
                             props => (

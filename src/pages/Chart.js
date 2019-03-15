@@ -180,7 +180,7 @@ class Chart extends Component {
 
     componentDidMount() {
         /** Initializes an interval counter to refresh every timeout milliseconds*/
-        setInterval(() => this.refresh(), 5000);
+        setInterval(() => this.refresh(), 60000);
     }
 
     render() {

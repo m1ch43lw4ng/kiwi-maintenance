@@ -12,8 +12,8 @@ A React web-app to read and write from an Airtable database and sync the differe
 * Bootstrap
 
 ## Usage
-### Config
-To use this, create a config.js file with the contents and correct credentials 
+### Running Locally
+To use this app for a table, create a .env file with the contents and correct credentials for that table.
 1. In terminal: `touch .env`
 2. Open .env (if using Sublime, run `open -a Sublime\ Text.app .env`)
 2. In the .env file, copy-paste the following text and fill in the variables:
@@ -21,6 +21,12 @@ To use this, create a config.js file with the contents and correct credentials
 REACT_APP_apiKey='YOUR_KEY'
 REACT_APP_baseID='YOUR_BASE'
 REACT_APP_url='YOUR_URL'
+```
+
+### Running on a Server
+1. Setting keys in Heroku:
+```bash
+heroku config:set REACT_APP_apiKey='YOUR_KEY' REACT_APP_baseID='YOUR_BASE' REACT_APP_url='YOUR_URL'
 ```
 
 ### React app

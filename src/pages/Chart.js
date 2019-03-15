@@ -189,8 +189,6 @@ class Chart extends Component {
                 <div className="table-wrapper">
                     <ToolkitProvider
                         boostrap4
-                        hover
-                        bordered
                         search
                         keyField="id"
                         data={ this.state.botxreg.map(record => RowData(record)) }

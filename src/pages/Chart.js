@@ -20,7 +20,7 @@ const columns = [{
     sort: true,
     headerStyle: {
         backgroundColor: '#FFFFFF'
-    }
+    },
 }, {
     dataField: 'Status',
     text: 'Status',

@@ -187,6 +187,7 @@ class Chart extends Component {
         return (
             <SplitPane split="vertical" minSize={800} maxSize={1200} defaultSize={1000} allowResize={true}>
                 <div className="table-wrapper">
+                    /** The table and search component */
                     <ToolkitProvider
                         boostrap4
                         search

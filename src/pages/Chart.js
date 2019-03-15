@@ -7,6 +7,7 @@ import config from '../config.js';
 import BootstrapTable from 'react-bootstrap-table-next';
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
+import moment from "moment-timezone";
 
 const base = new Airtable({ apiKey: config.get('apiKey')}).base(config.get('baseId'));
 const linkUrl = "https://airtable.com/embed/"+ config.get('url')+ "?backgroundColor=purple";
@@ -79,16 +80,14 @@ class Chart extends Component {
          * */
         let oldRecords = [];
         this.state.newUpdates.forEach((newRecord) => {
-            let botid = newRecord["fields"]["KiwibotID"];
-            console.log(botid);
+            let botID = newRecord["fields"]["KiwibotID"];
             base('BOTXREG1').select({
                 view: 'Grid view',
-                filterByFormula: 'KiwibotID = ' + botid
+                filterByFormula: 'KiwibotID = ' + botID
             }).eachPage(
                 (records, fetchNextPage) => {
                     records.forEach(function(record) {
                         oldRecords.push(record);
-
                         /**
                          * The updating step
                          * */
@@ -100,24 +99,19 @@ class Chart extends Component {
                             "Accountable": newRecord["fields"]["Accountable"],
                             "PROBLEMS": newRecord["fields"]["Problem"],
                             "Active Trigger": newRecord["fields"]["ActiveTrigger"]
-                        }, function(err, record) {
+                        }, function(err) {
                             if (err) { console.error(err); return; }
-                            console.log(record.get('id'));
                         });
                     });
                     fetchNextPage();
                 });
         });
 
-        console.log(this.state.newUpdates);
-        console.log(oldRecords);
-        console.log(this.state.maxRegID);
-
         /**
          * Sets the next iteration of newUpdates and maxRegID (state will update by next refresh)
          * */
         this.setState({
-            newUpdates: []
+            newUpdates: [],
         });
 
         base('REGXNOVEDADES').select({
@@ -136,23 +130,37 @@ class Chart extends Component {
         );
 
         /**
-         * Regenerates the table
+         * Regenerates the table : ONLY WORKS FOR <= 100 ROBOTS
          * */
         base('BOTXREG1').select({view: 'Grid view'})
             .eachPage(
-                (records, fetchNextPage) => {
-                    this.setState({
+                (records) => {
+                    this.setState ({
                         botxreg: records
                     });
                 }
             );
-        this.render();
     }
 
-    componentDidMount() {
+    componentWillMount() {
+        /**
+         * Current code only works for each airtable "page" (100 elements)
+         *
+         * For more, would have to use:
+         *
+         .eachPage(
+             (records, fetchNextPage) => {
+                 records.forEach((record) => {
+                    this.state.botxreg.push(record)
+                 });
+                 fetchNextPage();
+             }
+         );
+         *
+         * */
         base('BOTXREG1').select({view: 'Grid view'})
             .eachPage(
-                (records, fetchNextPage) => {
+                (records) => {
                     this.setState({
                         botxreg: records
                     });
@@ -161,10 +169,9 @@ class Chart extends Component {
 
         base('REGXNOVEDADES').select({
             view: 'General',
-            filterByFormula: 'REGID > 240'
+            filterByFormula: 'REGID > 340'
         }).eachPage(
             (records, fetchNextPage) => {
-                console.log(records);
                 this.setState({
                     maxRegID: records[records.length - 1]["fields"]["REGID"]
                 });
@@ -172,10 +179,11 @@ class Chart extends Component {
             }
         );
         console.log(this.state.maxRegID);
+    }
 
+    componentDidMount() {
         /** Initializes an interval counter to refresh every timeout milliseconds*/
-        setInterval(() => this.refresh(), 10000);
-
+        setInterval(() => this.refresh(), 5000);
     }
 
     render() {
@@ -189,6 +197,8 @@ class Chart extends Component {
                         search
                         defaultSorted={ defaultSorted }
                         boostrap4={ true }
+                        hover={ true }
+                        bordered = { true }
                         rel="stylesheet"
                         href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"
                         crossOrigin="anonymous"
@@ -196,7 +206,7 @@ class Chart extends Component {
                         {
                             props => (
                                 <div>
-                                    <h3>Kiwibot Registry</h3>
+                                    <h1>Kiwibot Maintenance Registry</h1>
                                     <SearchBar { ...props.searchProps } />
                                     <ClearSearchButton { ...props.searchProps } />
                                     <hr />
@@ -223,7 +233,6 @@ class Chart extends Component {
     }
 }
 
-
 export default Chart;
 
 const RowData = ({id, fields}) => (
@@ -232,7 +241,37 @@ const RowData = ({id, fields}) => (
         'Status': fields['Status'],
         'Symtoms/Diagnostic': fields['Symtoms/Diagnostic'],
         'Accountable': fields['Accountable'],
-        'Last Updated': fields['Last Updated'],
+        'Last Updated': DateConvert(fields['Last Updated']),
         'Problem': fields['Problem']
     }
 );
+
+/**
+ * @return {string}
+ */
+function DateConvert(dateString) {
+    let newDateString = moment.tz(dateString, "America/Los_Angeles").format();
+    return newDateString.slice(0, 4) + "/"
+        + newDateString.slice(5, 7) + "/"
+        + newDateString.slice(8, 10) + ", at "
+        + TimeConvert(newDateString.slice(11, 16));
+}
+
+/**
+ * @return {string}
+ */
+function TimeConvert(timeString) {
+    const hh = timeString.slice(0, 2);
+    const mm = timeString.slice(3, 5);
+    let dd = "AM";
+    let h = hh;
+    if (h >= 12) {
+        h = hh - 12;
+        dd = "PM";
+    }
+    if (h === 0) {
+        h = 12;
+    }
+
+    return h + ":" + mm + " " + dd;
+}

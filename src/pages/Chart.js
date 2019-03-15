@@ -16,44 +16,41 @@ const { SearchBar, ClearSearchButton } = Search;
 
 const columns = [{
     dataField: 'KiwibotID',
-    text: 'Kiwibot ID',
+    text: 'Bot #',
     sort: true,
-    headerStyle: {
-        backgroundColor: '#FFFFFF'
-    },
+    headerStyle: (colum, colIndex) => {
+        return { width: '90px', textAlign: 'center' };
+    }
 }, {
     dataField: 'Status',
     text: 'Status',
     sort: true,
-    headerStyle: {
-        backgroundColor: '#FFFFFF'
+    headerStyle: (colum, colIndex) => {
+        return { width: '110px', textAlign: 'center' };
     }
 }, {
     dataField: 'Symtoms/Diagnostic',
     text: 'Diagnostic',
     sort: true,
-    headerStyle: {
-        backgroundColor: '#FFFFFF'
-    }
 }, {
     dataField: 'Accountable',
     text: 'Accountable',
     sort: true,
-    headerStyle: {
-        backgroundColor: '#FFFFFF'
+    headerStyle: (colum, colIndex) => {
+        return { width: '150px', textAlign: 'center' };
     }
 }, {
     dataField: 'Last Updated',
     text: 'Last Updated',
     sort: true,
-    headerStyle: {
-        backgroundColor: '#FFFFFF'
+    headerStyle: (colum, colIndex) => {
+        return { width: '190px', textAlign: 'center' };
     }
 }, {
     dataField: 'Problem',
     text: 'Problems',
-    headerStyle: {
-        backgroundColor: '#FFFFFF'
+    headerStyle: (colum, colIndex) => {
+        return { width: '110px', textAlign: 'center' };
     }
 }];
 
@@ -188,13 +185,15 @@ class Chart extends Component {
 
     render() {
         return (
-            <SplitPane split="vertical" minSize={500} maxSize={1200} defaultSize={1000} allowResize={true}>
+            <SplitPane split="vertical" minSize={800} maxSize={1200} defaultSize={1000} allowResize={true}>
                 <div className="table-wrapper">
                     <ToolkitProvider
                         keyField="id"
                         data={ this.state.botxreg.map(record => RowData(record)) }
                         columns={ columns }
-                        search
+                        search={{
+
+                        }}
                         defaultSorted={ defaultSorted }
                         boostrap4={ true }
                         hover={ true }
@@ -206,9 +205,13 @@ class Chart extends Component {
                         {
                             props => (
                                 <div>
-                                    <h1>Kiwibot Maintenance Registry</h1>
+                                    <small>&nbsp;</small>
+                                    <h2><strong>Kiwibot Maintenance Registry</strong></h2>
+                                    <small>&nbsp;</small>
+
                                     <SearchBar { ...props.searchProps } />
                                     <ClearSearchButton { ...props.searchProps } />
+
                                     <hr />
                                     <BootstrapTable
                                         { ...props.baseProps }
@@ -253,7 +256,7 @@ function DateConvert(dateString) {
     let newDateString = moment.tz(dateString, "America/Los_Angeles").format();
     return newDateString.slice(0, 4) + "/"
         + newDateString.slice(5, 7) + "/"
-        + newDateString.slice(8, 10) + ", at "
+        + newDateString.slice(8, 10) + "  "
         + TimeConvert(newDateString.slice(11, 16));
 }
 

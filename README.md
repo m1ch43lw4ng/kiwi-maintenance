@@ -14,19 +14,13 @@ A React web-app to read and write from an Airtable database and sync the differe
 ## Usage
 ### Config
 To use this, create a config.js file with the contents and correct credentials 
-1. In terminal: `cd src && touch config.js && cd ..`
-2. In the config file, copy-paste the following text and fill in the variables:
+1. In terminal: `touch .env`
+2. Open .env (if using Sublime, run `open -a Sublime\ Text.app .env`)
+2. In the .env file, copy-paste the following text and fill in the variables:
 ```js
-import config from "react-global-configuration";
-
-config.set({
-    apiKey: 'APIKEY',
-    baseId: 'BASEID',
-    url: 'URL'
-});
-
-export default config;
-
+REACT_APP_apiKey='YOUR_KEY'
+REACT_APP_baseID='YOUR_BASE'
+REACT_APP_url='YOUR_URL'
 ```
 
 ### React app

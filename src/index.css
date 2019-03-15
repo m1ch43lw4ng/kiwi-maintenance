@@ -88,3 +88,13 @@ code {
   border-bottom: 4px solid \9;
   content: "";
 }
+
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+  overflow: hidden;
+}
+
+tr:hover{
+  background-color: #ededed;
+}

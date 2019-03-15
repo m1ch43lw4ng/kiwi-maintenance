@@ -188,19 +188,14 @@ class Chart extends Component {
             <SplitPane split="vertical" minSize={800} maxSize={1200} defaultSize={1000} allowResize={true}>
                 <div className="table-wrapper">
                     <ToolkitProvider
+                        boostrap4
+                        hover
+                        bordered
+                        search
                         keyField="id"
                         data={ this.state.botxreg.map(record => RowData(record)) }
                         columns={ columns }
-                        search={{
-
-                        }}
                         defaultSorted={ defaultSorted }
-                        boostrap4={ true }
-                        hover={ true }
-                        bordered = { true }
-                        rel="stylesheet"
-                        href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"
-                        crossOrigin="anonymous"
                     >
                         {
                             props => (

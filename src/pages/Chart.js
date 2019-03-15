@@ -3,13 +3,14 @@ import SplitPane from 'react-split-pane';
 import Iframe from 'react-iframe'
 import '../index.css';
 import Airtable from 'airtable';
+import config from '../config.js';
 import BootstrapTable from 'react-bootstrap-table-next';
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import moment from "moment-timezone";
 
-const base = new Airtable({ apiKey: process.env.apiKey}).base(process.env.baseID);
-const linkUrl = "https://airtable.com/embed/"+ process.env.url + "?backgroundColor=purple";
+const base = new Airtable({ apiKey: config.get('apiKey')}).base(config.get('baseID'));
+const linkUrl = "https://airtable.com/embed/"+ config.get('url')+ "?backgroundColor=purple";
 
 const { SearchBar, ClearSearchButton } = Search;
 

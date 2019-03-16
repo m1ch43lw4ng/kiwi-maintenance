@@ -75,7 +75,6 @@ class Chart extends Component {
          * Iterates through the old records that will be replaced by the updates added during
          * the previous refresh, and updates all of them to match the new updates (regxnovedades).
          * */
-        let oldRecords = [];
         this.state.newUpdates.forEach((newRecord) => {
             let botID = newRecord["fields"]["KiwibotID"];
             base('BOTXREG1').select({
@@ -84,7 +83,6 @@ class Chart extends Component {
             }).eachPage(
                 (records, fetchNextPage) => {
                     records.forEach(function(record) {
-                        oldRecords.push(record);
                         /**
                          * The updating step
                          * */
@@ -187,7 +185,7 @@ class Chart extends Component {
         return (
             <SplitPane split="vertical" minSize={800} maxSize={1200} defaultSize={1000} allowResize={true}>
                 <div className="table-wrapper">
-                    /** The table and search component */
+                    {/** The table and search component */}
                     <ToolkitProvider
                         boostrap4
                         search

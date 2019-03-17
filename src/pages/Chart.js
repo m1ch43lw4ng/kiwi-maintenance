@@ -11,7 +11,8 @@ import moment from "moment-timezone";
 import {
     BrowserView,
     MobileView,
-    isMobile,
+    isBrowser,
+    isMobile
 } from "react-device-detect";
 
 const base = new Airtable({ apiKey: config.get('apiKey')}).base(config.get('baseID'));

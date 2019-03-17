@@ -8,6 +8,12 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import moment from "moment-timezone";
+import {
+    BrowserView,
+    MobileView,
+    isBrowser,
+    isMobile
+} from "react-device-detect";
 
 const base = new Airtable({ apiKey: config.get('apiKey')}).base(config.get('baseID'));
 const linkUrl = "https://airtable.com/embed/"+ config.get('url')+ "?backgroundColor=purple";
@@ -182,49 +188,62 @@ class Chart extends Component {
     }
 
     render() {
-        return (
-            <SplitPane split="vertical" minSize={800} maxSize={1200} defaultSize={1000} allowResize={true}>
-                <div className="table-wrapper">
-                    {/** The table and search component */}
-                    <ToolkitProvider
-                        boostrap4
-                        search
-                        keyField="id"
-                        data={ this.state.botxreg.map(record => RowData(record)) }
-                        columns={ columns }
-                        defaultSorted={ defaultSorted }
-                    >
-                        {
-                            props => (
-                                <div>
-                                    <small>&nbsp;</small>
-                                    <h2><strong>Kiwibot Maintenance Registry</strong></h2>
-                                    <small>&nbsp;</small>
+        if (isMobile) {
+            return(
+                <Iframe url= {linkUrl}
+                        width="100%"
+                        height="800"
+                        id="myId"
+                        className="airtable-embed"
+                        display="initial"
+                        position="relative"
+                        allowFullScreen/>
+            )
+        } else {
+            return (
+                <SplitPane split="vertical" minSize={800} maxSize={1200} defaultSize={1000} allowResize={true}>
+                    <div className="table-wrapper">
+                        {/** The table and search component */}
+                        <ToolkitProvider
+                            boostrap4
+                            search
+                            keyField="id"
+                            data={ this.state.botxreg.map(record => RowData(record)) }
+                            columns={ columns }
+                            defaultSorted={ defaultSorted }
+                        >
+                            {
+                                props => (
+                                    <div>
+                                        <small>&nbsp;</small>
+                                        <h2><strong>Kiwibot Maintenance Registry</strong></h2>
+                                        <small>&nbsp;</small>
 
-                                    <SearchBar { ...props.searchProps } />
-                                    <ClearSearchButton { ...props.searchProps } />
+                                        <SearchBar { ...props.searchProps } />
+                                        <ClearSearchButton { ...props.searchProps } />
 
-                                    <hr />
-                                    <BootstrapTable
-                                        { ...props.baseProps }
-                                    />
-                                </div>
-                            )
-                        }
-                    </ToolkitProvider>
-                </div>
-                <div className="overlay">
-                    <Iframe url= {linkUrl}
-                            width="100%"
-                            height="800"
-                            id="myId"
-                            className="airtable-embed"
-                            display="initial"
-                            position="relative"
-                            allowFullScreen/>
-                </div>
-            </SplitPane>
-        );
+                                        <hr />
+                                        <BootstrapTable
+                                            { ...props.baseProps }
+                                        />
+                                    </div>
+                                )
+                            }
+                        </ToolkitProvider>
+                    </div>
+                    <div className="overlay">
+                        <Iframe url= {linkUrl}
+                                width="100%"
+                                height="800"
+                                id="myId"
+                                className="airtable-embed"
+                                display="initial"
+                                position="relative"
+                                allowFullScreen/>
+                    </div>
+                </SplitPane>
+            );
+        }
     }
 }
 

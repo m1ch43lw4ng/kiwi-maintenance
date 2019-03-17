@@ -2,7 +2,7 @@ import config from "react-global-configuration";
 
 config.set({
     apiKey: process.env.REACT_APP_apiKey,
-    baseID: 'appftVAUOeQ3VtUxf',
+    baseID: process.env.REACT_APP_baseID,
     url: process.env.REACT_APP_url,
 });
 

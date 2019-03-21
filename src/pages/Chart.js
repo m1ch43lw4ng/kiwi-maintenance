@@ -170,9 +170,9 @@ class Chart extends Component {
 
         base('REGXNOVEDADES').select({
             view: 'General',
-            filterByFormula: 'REGID > 340'
+            filterByFormula: 'REGID > 410'
         }).eachPage(
-            (records, fetchNextPage) => {
+            (records, fetchNextPage) =>  {
                 this.setState({
                     maxRegID: records[records.length - 1]["fields"]["REGID"]
                 });
@@ -184,12 +184,12 @@ class Chart extends Component {
 
     componentDidMount() {
         /** Initializes an interval counter to refresh every timeout milliseconds*/
-        setInterval(() => this.refresh(), 60000);
+        setInterval(() => this.refresh(), 15000);
     }
 
     render() {
-        if ( isMobile ) {
-            return(
+        if (isMobile) {
+            return (
                 <Iframe url= {linkUrl}
                         width="100%"
                         height="800"

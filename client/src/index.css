@@ -98,3 +98,61 @@ table {
 tr:hover{
   background-color: #ededed;
 }
+
+.pill {
+  border-radius: 9999px;
+}
+
+.border-box {
+  box-sizing: border-box;
+}
+
+.fit {
+  max-width: 100%;
+}
+
+.flex-none {
+  -webkit-box-flex: 0;
+  -webkit-flex: none;
+  -ms-flex: none;
+  flex: none;
+}
+
+.baymax * {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.choiceToken {
+  vertical-align: top;
+}
+
+.mr-half {
+  margin-right: .25rem;
+}
+
+.px1 {
+  padding-left: .5rem;
+  padding-right: .5rem;
+}
+
+.truncate {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.line-height-4 {
+  line-height: 1.5;
+}
+
+.red, .redBright, .red-focus:focus {
+  background-color: #f82b60;
+}
+
+.text-white, a.text-white, .baymax a.text-white, .text-white a, .baymax .text-white a {
+  color: #fff;
+  fill: #fff;
+}

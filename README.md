@@ -6,7 +6,7 @@ A React web-app to read and write from an Airtable database and sync the differe
 * [Michael Wang](http://m1ch43lw4ng.com), http://github.com/m1ch43lw4ng
 
 ## Built With
-* [Airtable API](https://airtable.com)
+* [Airtable API](client/https://airtable.com)
 * React.js
 * Node.js
 * Bootstrap

@@ -92,6 +92,7 @@ function crossUpdate() {
             fetchNextPage();
         }
     );
+    console.log('Tables updated');
 }
 
 /**

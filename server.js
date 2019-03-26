@@ -125,4 +125,4 @@ base('REGXNOVEDADES').select({
     }
 );
 
-setInterval(() => crossUpdate(), 5000);
+setInterval(() => crossUpdate(), 30000);

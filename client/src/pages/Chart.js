@@ -3,7 +3,6 @@ import SplitPane from 'react-split-pane';
 import Iframe from 'react-iframe'
 import '../index.css';
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
-import moment from "moment-timezone";
 import {
     // eslint-disable-next-line
     BrowserView,

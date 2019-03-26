@@ -13,7 +13,7 @@
     "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "dependencies": {
-    "airtable": "^0.5.9",
+    "airtable": "^0.5.10",
     "babel-eslint": "^10.0.1",
     "body-parser": "^1.18.3",
     "dotenv": "^7.0.0",

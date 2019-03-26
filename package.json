@@ -2,7 +2,7 @@
   "name": "kiwi-maintenance",
   "version": "2.1.0",
   "engines": {
-    "node": "10.3.0"
+    "node": "10.15.1"
   },
   "scripts": {
     "client": "cd client && yarn start",
@@ -14,16 +14,8 @@
   },
   "dependencies": {
     "airtable": "^0.5.10",
-    "babel-eslint": "^10.0.1",
     "body-parser": "^1.18.3",
     "dotenv": "^7.0.0",
-    "eslint": "^5.15.3",
-    "eslint-config-node-app": "^1.0.4",
-    "eslint-config-react-app": "^3.0.8",
-    "eslint-plugin-flowtype": "^3.4.2",
-    "eslint-plugin-import": "^2.16.0",
-    "eslint-plugin-jsx-a11y": "^6.2.1",
-    "eslint-plugin-react": "^7.12.4",
     "express": "^4.16.4",
     "minimatch": "^3.0.4",
     "path": "^0.12.7",

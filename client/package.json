@@ -11,6 +11,7 @@
     "datatables.net-dt": "^1.10.19",
     "jquery": "^3.3.1",
     "jupyter-react-js": "^0.5.1",
+    "kleur": "^3.0.2",
     "moment-timezone": "^0.5.23",
     "popper.js": "^1.14.7",
     "react": "^16.8.4",

@@ -26,7 +26,8 @@
     "yarn": "^1.13.0"
   },
   "devDependencies": {
-    "concurrently": "^4.0.1"
+    "concurrently": "^4.0.1",
+    "uglify-js": ">=2.6.0"
   },
   "eslintConfig": {
     "extends": "react-app"

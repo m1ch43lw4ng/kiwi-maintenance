@@ -1,6 +1,9 @@
 {
   "name": "kiwi-maintenance",
   "version": "2.1.0",
+  "engines": {
+    "node": "10.3.0"
+  },
   "scripts": {
     "client": "cd client && yarn start",
     "dotenv": "^7.0.0",
